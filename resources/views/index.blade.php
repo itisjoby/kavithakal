@@ -13,26 +13,26 @@
         <script>
 let base_url = "<?php echo url('/'); ?>";
         </script>
-        <link href="{{asset('assets/main.css')}}" rel="stylesheet">
-        <link href="{{asset('assets/blog.css')}}" rel="stylesheet">
+        <link href="<?php echo config('app.url') . 'public/assets/main.css'; ?>" rel="stylesheet">
+        <link href="<?php echo config('app.url') . 'public/assets/blog.css'; ?>" rel="stylesheet">
 
     </head>
     <body>
         <header>
             <!-- Fixed navbar -->
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="/"><img src="{{URL('/assets/logo.jpg')}}" class="img-fluid img-rounded" alt="Responsive image" style="max-height: 70px;"></a>
+                <a class="navbar-brand" href="<?php echo config('app.url'); ?>"><img src="{{URL('/assets/logo.jpg')}}" class="img-fluid img-rounded" alt="Responsive image" style="max-height: 70px;"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="<?php echo config('app.url'); ?>">Home <span class="sr-only">(current)</span></a>
                         </li>
 
                     </ul>
-                    <form class="form-inline mt-2 mt-md-0" action="/search" method="get">
+                    <form class="form-inline mt-2 mt-md-0" action="<?php echo config('app.url'); ?>search" method="get">
                         <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search" aria-label="Search" value="{{ session()->get('search') }}">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
@@ -67,7 +67,7 @@ let base_url = "<?php echo url('/'); ?>";
                         <div class="col-md-6 px-0">
                             <h1 class="display-4 font-italic"><?php echo $top_posts[0]->title; ?></h1>
                             <p class="lead my-3"><?php echo $top_posts[0]->mini_content; ?></p>
-                            <p class="lead mb-0"><a href="/read/<?php echo $top_posts[0]->id; ?>" class="text-white font-weight-bold">Continue reading...</a></p>
+                            <p class="lead mb-0"><a href="<?php echo config('app.url'); ?>read/<?php echo $top_posts[0]->id; ?>" class="text-white font-weight-bold">Continue reading...</a></p>
                         </div>
                     </div>
                     <?php
@@ -86,11 +86,11 @@ let base_url = "<?php echo url('/'); ?>";
                                         <div class="card-body d-flex flex-column align-items-start">
                                             <strong class="d-inline-block mb-2 text-primary">World</strong>
                                             <h3 class="mb-0">
-                                                <a class="text-dark" href="/read/<?php echo $new_post->id; ?>"><?php echo $new_post->title; ?></a>
+                                                <a class="text-dark" href="<?php echo config('app.url'); ?>read/<?php echo $new_post->id; ?>"><?php echo $new_post->title; ?></a>
                                             </h3>
                                             <div class="mb-1 text-muted"><?php echo date('M d,', strtotime($new_post->created_at)); ?></div>
                                             <p class="card-text mb-auto"><?php echo $new_post->mini_content; ?></p>
-                                            <a href="/read/<?php echo $new_post->id; ?>">Continue reading</a>
+                                            <a href="<?php echo config('app.url'); ?>read/<?php echo $new_post->id; ?>">Continue reading</a>
                                         </div>
                                         <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
                                     </div>
@@ -124,7 +124,7 @@ let base_url = "<?php echo url('/'); ?>";
                                     <p>
                                         <?php echo $post['content']; ?>
                                     </p>
-                                    <a href="/read/<?php echo $post['id']; ?>">Read ...</a>
+                                    <a href="<?php echo config('app.url'); ?>read/<?php echo $post['id']; ?>">Read ...</a>
                                 </div><!-- /.blog-post -->
                                 <?php
                             }
@@ -192,8 +192,8 @@ let base_url = "<?php echo url('/'); ?>";
 
 
 
-            <script src="{{asset('/js/public_dashboard.js')}}"></script>
-            <script src="{{asset('/assets/holder.min.js')}}"></script>
+            <script src="<?php echo config('app.url') . '/js/public_dashboard.js'; ?>"></script>
+            <script src="<?php echo config('app.url') . '/js/holder.min.js'; ?>"></script>
         </div>
     </main>
 
