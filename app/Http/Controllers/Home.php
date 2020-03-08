@@ -55,6 +55,11 @@ order by p.readed_count desc limit 1"), array(
             'status' => 'A',
         ));
         $data['other_posts'] = $posts;
+
+
+
+        DB::table('posts')->where(['id' => $id])->update(['readed_count' => ($data['article'][0]->readed_count + 1)]);
+
         return view('read_more')->with($data);
     }
 
@@ -98,5 +103,26 @@ order by p.readed_count desc"), array());
         session(['search' => $query]);
 
         return view('search')->with($data);
+    }
+
+    function getRandomWord($len = 10)
+    {
+        $word = array_merge(range('a', 'z'), range('A', 'Z'));
+        shuffle($word);
+        return substr(implode($word), 0, $len);
+    }
+
+    function savePost()
+    {
+
+        for ($i = 0; $i < 1000; $i++) {
+            $title = $this->getRandomWord(10);
+            $mini_content = $this->getRandomWord(250);
+            $content = $this->getRandomWord(1000);
+            $created_at = date('Y-m-d', rand(1577860048, 1582957648));
+            $values = ['title' => $title, 'content' => trim($content), 'mini_content' => $mini_content, 'created_by' => session()->get('session_id'), 'readed_count' => 0, 'status' => 'A', 'created_at' => $created_at];
+            $id = DB::table('Posts')->insertGetId($values);
+        }
+        d($i . "done");
     }
 }
