@@ -1,0 +1,17 @@
+body {
+                background: url('bg.jpg') no-repeat center center fixed;
+                -moz-background-size: cover;
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+
+            button.delete_btn {
+                position: absolute;
+                right: 0px;
+                margin: 10px;
+            }
+
+            .cards_wraper {
+                margin-bottom: 20px;
+            }
