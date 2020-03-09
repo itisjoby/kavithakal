@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use DB;
 use JasonGrimes\Paginator;
 
-class Admin extends Controller {
+class Admin extends Controller
+{
 
     //
-    function dashboard($page_no = '1') {
+    function dashboard($page_no = '1')
+    {
 
         $totalItems_arr = DB::select(DB::raw("SELECT count(p.id) as total FROM posts p  WHERE p.status = :status "), array(
-                    'status' => 'A',
+            'status' => 'A',
         ));
         $totalItems = $totalItems_arr[0]->total;
         $itemsPerPage = 5;
@@ -22,7 +24,7 @@ class Admin extends Controller {
         $show_records_from = ($currentPage - 1) * $itemsPerPage;
 
         $posts = DB::select(DB::raw("SELECT p.* FROM posts p  WHERE p.status = :status order by p.created_at desc limit " . $show_records_from . ", " . $itemsPerPage), array(
-                    'status' => 'A',
+            'status' => 'A',
         ));
         $data['posts'] = $posts;
 
@@ -31,7 +33,8 @@ class Admin extends Controller {
         return view('dashboard')->with($data);
     }
 
-    function savePost() {
+    function savePost()
+    {
         $title = $_POST['title'];
         $mini_content = $_POST['mini_content'];
         $content = $_POST['content'];
@@ -57,21 +60,27 @@ class Admin extends Controller {
         echo json_encode(['status' => 1, 'msg' => 'post saved successfully']);
     }
 
-    function deletePost() {
+    function deletePost()
+    {
         $postid = $_POST['postid'];
 
         DB::table('posts')->where(['id' => $postid])->update(['status' => 'D']);
-
+        $_SESSION['site_messages'] = [
+            'status' => 1,
+            'msg' => 'Post deleted successfully'
+        ];
         echo json_encode(['status' => 1, 'msg' => 'post deleted successfully']);
     }
 
-    function everyDayPosts() {
+    function everyDayPosts()
+    {
         $daily_postcount = DB::select(DB::raw("SELECT COUNT(id) as count,CAST(created_at as DATE) as created_at FROM `posts` group by CAST(created_at as DATE)  order by created_at"), array());
         echo json_encode(['status' => 1, 'data' => $daily_postcount]);
         die;
     }
 
-    function signout(Request $request) {
+    function signout(Request $request)
+    {
         $_SESSION['site_messages'] = [
             'status' => 1,
             'msg' => 'Logged out successfully'
@@ -79,5 +88,4 @@ class Admin extends Controller {
         $request->session()->flush();
         return redirect('/');
     }
-
 }
