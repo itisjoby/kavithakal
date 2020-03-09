@@ -1,4 +1,19 @@
 $(document).ready(function() {
+  // toggle menu click
+  $(document).on("click", "a.toggleMenu", function() {
+    if (
+      $(this)
+        .closest(".mainMenuOverlay")
+        .hasClass("open")
+    ) {
+      var audio = new Audio("../assets/sounds/ding.mp3");
+    } else {
+      var audio = new Audio("../assets/sounds/drum.mp3");
+    }
+
+    audio.play();
+  });
+
   $(".add_new_story").on("click", function() {
     $("#addnewcontent").modal("show");
     $(".tags").tagsInput({
