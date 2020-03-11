@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Begin page content -->
-<main role="main" class="container mt-5">
+<main role="main" class="container mt-10">
     <main role="main" class="container">
         <div class="row">
             <div class="col-md-8 blog-main">
