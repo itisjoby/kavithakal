@@ -6,7 +6,7 @@ $(document).ready(function() {
         .closest(".mainMenuOverlay")
         .hasClass("open")
     ) {
-      var audio = new Audio("../assets/sounds/ding.mp3");
+      var audio = new Audio("../assets/sounds/blop.mp3");
     } else {
       var audio = new Audio("../assets/sounds/drum.mp3");
     }
@@ -98,6 +98,7 @@ function savePost(title, mini_content, content, tags) {
       if (data["status"] == 1) {
         location.href = base_url + "/admin";
       } else {
+        alertify.error(data["msg"]);
         let error_msg = `<div class="alert alert-danger alert-dismissible">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   ${data["msg"]}

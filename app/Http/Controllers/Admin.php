@@ -40,8 +40,8 @@ class Admin extends Controller
         $content = $_POST['content'];
         $tags = explode('####', $_POST['tags']);
 
-        if (strlen(trim($content)) < 10) {
-            echo json_encode(['status' => 0, 'msg' => 'content too less']);
+        if (strlen(trim($content)) < 20) {
+            echo json_encode(['status' => 0, 'msg' => 'Content too less. please write atleast 20 characters']);
             die;
         }
         // Start transaction
@@ -49,7 +49,7 @@ class Admin extends Controller
         DB::beginTransaction();
         $values = ['title' => $title, 'content' => trim($content), 'mini_content' => $mini_content, 'created_by' => session()->get('session_id'), 'readed_count' => 0, 'status' => 'A', 'created_at' => date('Y-m-d H:i:s')];
 
-        $id = DB::table('Posts')->insertGetId($values);
+        $id = DB::table('posts')->insertGetId($values);
         $tag_data = [];
         foreach ($tags as $tag) {
             $tag_data[] = ['title' => $tag, 'post_id' => $id, 'status' => 'A', 'created_at' => date('Y-m-d H:i:s')];
@@ -57,6 +57,10 @@ class Admin extends Controller
 
         DB::table('tags')->insert($tag_data);
         DB::commit();
+        $_SESSION['site_messages'] = [
+            'status' => 1,
+            'msg' => 'Post saved successfully'
+        ];
         echo json_encode(['status' => 1, 'msg' => 'post saved successfully']);
     }
 

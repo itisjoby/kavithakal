@@ -138,23 +138,26 @@
                         <div class="error_screen"></div>
                         <div class="col-sm-12">
                             <div class="form-group">
+                                <label>Title</label>
                                 <textarea class="form-control" cols="10" rows="3" maxlength="500000" name="title" id="title" placeholder="title of the content"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
+                                <label>Mini Content <small> (first few lines of the content)</small></label>
                                 <textarea class="form-control" cols="10" rows="5" maxlength="500000" name="mini_content" id="mini_content" placeholder="first paragraph of the content"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
+                                <label>Content</label>
                                 <input type="hidden" name="_csrfToken" value="{{ csrf_token() }}" />
                                 <textarea class="form-control" cols="10" rows="15" maxlength="500000" name="content" id="content" placeholder="actual content"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-
+                                <label>Tags <small>(to easly search)</small></label>
                                 <input type="text" class="form-control tags" maxlength="500000" name="tags" id="tags" placeholder="tags">
                             </div>
                         </div>
