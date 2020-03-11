@@ -23,7 +23,8 @@
                                 <?php echo $post['content']; ?>
                             </p>
                             <a href="/read/<?php echo $post['id']; ?>">Read ...</a>
-                        </div><!-- /.blog-post -->
+                        </div>
+                        <!-- /.blog-post -->
                 <?php
                     }
                 }
